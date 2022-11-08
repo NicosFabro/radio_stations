@@ -25,12 +25,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(state.copyWith(status: HomeStatus.loading));
 
     try {
-      final radioStationsResult = await _radioService.getRadioStations();
+      final radioStations = await _radioService.getRadioStations();
 
       emit(
         state.copyWith(
           status: HomeStatus.success,
-          radioStations: radioStationsResult.results,
+          radioStations: radioStations,
         ),
       );
     } on GetRadioStationsException {

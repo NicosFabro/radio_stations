@@ -1,21 +1,3 @@
-class RadioResults {
-  RadioResults({required this.results});
-
-  factory RadioResults.fromJson(Map<String, dynamic> json) {
-    if (json['results'] != null) {
-      final results = List<Map<dynamic, dynamic>>.from(json['results'] as List)
-          .map((v) => RadioStation.fromJson(Map<String, dynamic>.from(v)))
-          .toList();
-
-      return RadioResults(results: results);
-    } else {
-      return RadioResults(results: []);
-    }
-  }
-
-  final List<RadioStation> results;
-}
-
 class RadioStation {
   RadioStation({
     required this.id,
