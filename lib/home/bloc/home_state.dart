@@ -9,14 +9,14 @@ class HomeState extends Equatable {
   });
 
   final HomeStatus status;
-  final List<Radio> radioStations;
+  final List<RadioStation> radioStations;
 
   @override
   List<Object?> get props => [status, radioStations];
 
   HomeState copyWith({
     HomeStatus? status,
-    List<Radio>? radioStations,
+    List<RadioStation>? radioStations,
   }) {
     return HomeState(
       status: status ?? this.status,

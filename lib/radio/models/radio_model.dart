@@ -3,21 +3,21 @@ class RadioResults {
 
   factory RadioResults.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
-      final results = <Radio>[];
-      json['results'].forEach((v) {
-        results.add(Radio.fromJson(v as Map<String, dynamic>));
-      });
+      final results = List<Map<dynamic, dynamic>>.from(json['results'] as List)
+          .map((v) => RadioStation.fromJson(Map<String, dynamic>.from(v)))
+          .toList();
+
       return RadioResults(results: results);
     } else {
       return RadioResults(results: []);
     }
   }
 
-  final List<Radio> results;
+  final List<RadioStation> results;
 }
 
-class Radio {
-  Radio({
+class RadioStation {
+  RadioStation({
     required this.id,
     required this.name,
     required this.country,
@@ -27,7 +27,7 @@ class Radio {
     required this.logo,
   });
 
-  factory Radio.fromJson(Map<String, dynamic> json) => Radio(
+  factory RadioStation.fromJson(Map<String, dynamic> json) => RadioStation(
         id: json['i'] as String,
         name: json['n'] as String,
         country: json['c'] as String,

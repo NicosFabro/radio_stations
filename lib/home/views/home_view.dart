@@ -1,9 +1,7 @@
-import 'dart:developer' as dev;
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:radio/home/bloc/home_bloc.dart';
+import 'package:radio/home/views/widgets/radio_station_card.dart';
 import 'package:radio/radio/radio.dart';
 
 class HomePage extends StatelessWidget {
@@ -25,8 +23,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<HomeBloc>().state;
-
     return Scaffold(
       body: SafeArea(
         child: NestedScrollView(
@@ -52,7 +48,17 @@ class HomeView extends StatelessWidget {
                   );
                 }
               }
-              return const SizedBox();
+
+              return GridView.count(
+                crossAxisCount: 3,
+                mainAxisSpacing: 4,
+                crossAxisSpacing: 4,
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                children: state.radioStations
+                    .map((station) => RadioStationCard(radioStation: station))
+                    .toList(),
+              );
             },
           ),
         ),
