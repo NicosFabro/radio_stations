@@ -7,6 +7,6 @@ abstract class HomeEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class HomeRadioStationsRequested extends HomeEvent {
-  const HomeRadioStationsRequested();
+class GetNowPlayingRadioStationsRequested extends HomeEvent {
+  const GetNowPlayingRadioStationsRequested();
 }

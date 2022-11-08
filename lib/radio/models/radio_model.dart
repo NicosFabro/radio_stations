@@ -1,5 +1,7 @@
-class RadioStation {
-  RadioStation({
+import 'package:equatable/equatable.dart';
+
+class RadioStation extends Equatable {
+  const RadioStation({
     required this.id,
     required this.name,
     required this.country,
@@ -26,4 +28,21 @@ class RadioStation {
   final String genreName;
   final String streamUrl;
   final String logo;
+
+  static const empty = RadioStation(
+    id: '',
+    name: '',
+    country: '',
+    genreId: '',
+    genreName: '',
+    streamUrl: '',
+    logo: '',
+  );
+
+  @override
+  List<Object> get props => [
+        id,
+        name,
+        country,
+      ];
 }

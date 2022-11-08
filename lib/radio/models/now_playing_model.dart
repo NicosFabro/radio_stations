@@ -1,5 +1,7 @@
-class NowPlaying {
-  NowPlaying({
+import 'package:equatable/equatable.dart';
+
+class NowPlaying extends Equatable {
+  const NowPlaying({
     required this.radioId,
     required this.radioName,
     required this.radioLogo,
@@ -25,4 +27,21 @@ class NowPlaying {
   final String radioStream;
   final String titleSong;
   final String artistSong;
+
+  static const empty = NowPlaying(
+    radioId: '',
+    radioName: '',
+    radioLogo: '',
+    radioStream: '',
+    titleSong: '',
+    artistSong: '',
+  );
+
+  @override
+  List<Object> get props => [
+        radioId,
+        radioName,
+        titleSong,
+        artistSong,
+      ];
 }

@@ -5,22 +5,23 @@ enum HomeStatus { initial, loading, success, failure }
 class HomeState extends Equatable {
   const HomeState({
     this.status = HomeStatus.initial,
-    this.radioStations = const [],
+    this.nowPlayingRadioStations = const [],
   });
 
   final HomeStatus status;
-  final List<RadioStation> radioStations;
+  final List<NowPlaying> nowPlayingRadioStations;
 
   @override
-  List<Object?> get props => [status, radioStations];
+  List<Object?> get props => [status, nowPlayingRadioStations];
 
   HomeState copyWith({
     HomeStatus? status,
-    List<RadioStation>? radioStations,
+    List<NowPlaying>? nowPlayingRadioStations,
   }) {
     return HomeState(
       status: status ?? this.status,
-      radioStations: radioStations ?? this.radioStations,
+      nowPlayingRadioStations:
+          nowPlayingRadioStations ?? this.nowPlayingRadioStations,
     );
   }
 }
