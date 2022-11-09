@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:radio/now_playing/bloc/now_playing_bloc.dart';
 import 'package:radio/radio/radio.dart';
+import 'package:radio/radio_ui/radio_ui.dart';
+import 'package:rive/rive.dart';
 
 class NowPlayingPage extends StatelessWidget {
   const NowPlayingPage({
@@ -33,7 +35,6 @@ class NowPlayingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final radioLogoSize = screenWidth * 0.4;
 
     return BlocBuilder<NowPlayingBloc, NowPlayingState>(
       bloc: context.read(),
@@ -44,21 +45,49 @@ class NowPlayingView extends StatelessWidget {
           appBar: AppBar(
             title: Text(nowPlaying.radioName),
           ),
-          body: SafeArea(
-            child: Center(
-              child: Stack(
-                children: [
-                  RadioStationLogo(
-                    id: state.nowPlayingIndex,
-                    logo: RadioService.getLogoURL(
-                      nowPlaying.radioLogo,
-                    ),
-                    width: radioLogoSize,
-                    height: radioLogoSize,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {},
+            icon: const Icon(Icons.play_arrow),
+            label: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  nowPlaying.titleSong,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  nowPlaying.artistSong,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: RadioTextStyles.button.copyWith(fontSize: 14),
+                ),
+              ],
+            ),
+          ),
+          body: Center(
+            child: Column(
+              children: [
+                RadioStationLogo(
+                  id: state.nowPlayingIndex,
+                  logo: RadioService.getLogoURL(
+                    nowPlaying.radioLogo,
+                  ),
+                  width: screenWidth,
+                  height: screenWidth * 0.5,
+                  fit: BoxFit.cover,
+                ),
+                SizedBox(
+                  width: screenWidth,
+                  height: screenWidth,
+                  child: RiveAnimation.asset(
+                    'assets/animations/audio-visualizer.riv',
                     fit: BoxFit.fitWidth,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         );

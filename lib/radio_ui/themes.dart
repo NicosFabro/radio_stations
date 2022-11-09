@@ -14,6 +14,7 @@ class RadioTheme {
       ),
       scaffoldBackgroundColor: RadioColors.black,
       textTheme: _textTheme,
+      appBarTheme: _appBarTheme,
     );
   }
 
@@ -28,6 +29,17 @@ class RadioTheme {
       headline5: RadioTextStyles.headline5,
       headline6: RadioTextStyles.headline6,
       button: RadioTextStyles.button,
+    );
+  }
+
+  static AppBarTheme get _appBarTheme {
+    return AppBarTheme(
+      color: RadioColors.black,
+      centerTitle: true,
+      titleTextStyle: RadioTextStyles.bodyText1.copyWith(
+        fontWeight: FontWeight.w700,
+      ),
+      iconTheme: const IconThemeData(color: RadioColors.beige),
     );
   }
 }

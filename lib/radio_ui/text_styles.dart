@@ -74,6 +74,7 @@ class RadioTextStyles {
     return _baseTextStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.w900,
+      color: RadioColors.black,
     );
   }
 }
