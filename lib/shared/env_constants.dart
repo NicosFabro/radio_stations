@@ -1,4 +1,7 @@
 class EnvConstants {
-  static const x_rapidapi_key = ''; // Add the missing X-RapidAPI-Key here
-  static const x_rapidapi_host = ''; // Add the missing X-RapidAPI-Host here
+  // Add the missing X-RapidAPI-Key here
+  static const xRapidKey = '';
+
+  // Add the missing X-RapidAPI-Host here
+  static const xRapidHost = '';
 }

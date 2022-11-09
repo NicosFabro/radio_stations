@@ -44,7 +44,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           nowPlayingRadioStations: nowPlayingRadioStations,
         ),
       );
-    } on GetRadioStationsException {
+    } on GetNowPlayingRadioStationsException {
       emit(state.copyWith(status: HomeStatus.failure));
     }
   }

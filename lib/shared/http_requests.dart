@@ -9,8 +9,8 @@ class HttpRequests {
     final response = await http.get(
       url,
       headers: {
-        'X-RapidAPI-Key': EnvConstants.x_rapidapi_key,
-        'X-RapidAPI-Host': EnvConstants.x_rapidapi_host,
+        'X-RapidAPI-Key': EnvConstants.xRapidKey,
+        'X-RapidAPI-Host': EnvConstants.xRapidHost,
       },
     );
 
