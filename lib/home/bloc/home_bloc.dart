@@ -23,7 +23,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     GetNowPlayingRadioStationsRequested event,
     Emitter<HomeState> emit,
   ) async {
-    log('_onHomeRadioStationsRequested');
     emit(state.copyWith(status: HomeStatus.loading));
 
     try {

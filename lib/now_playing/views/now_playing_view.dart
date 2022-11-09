@@ -1,7 +1,7 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:radio/now_playing/bloc/now_playing_bloc.dart';
+import 'package:radio/player/player.dart';
 import 'package:radio/radio/radio.dart';
 import 'package:radio/radio_ui/radio_ui.dart';
 import 'package:rive/rive.dart';
@@ -18,33 +18,32 @@ class NowPlayingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NowPlayingBloc(
-        radioService: context.read<RadioService>(),
-        nowPlaying: nowPlaying,
-        index: index,
-      ),
-      //..add(GetRadioStationInfoRequested(radioId: nowPlaying.radioId)),
-      child: const NowPlayingView(),
+    context
+        .read<PlayerBloc>()
+        .add(StreamRadioStationRequested(streamURL: nowPlaying.radioStream));
+    return NowPlayingView(
+      nowPlaying: nowPlaying,
+      nowPlayingIndex: index,
     );
   }
 }
 
 class NowPlayingView extends StatelessWidget {
-  const NowPlayingView({super.key});
+  const NowPlayingView({
+    super.key,
+    required this.nowPlaying,
+    required this.nowPlayingIndex,
+  });
+
+  final NowPlaying nowPlaying;
+  final int nowPlayingIndex;
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    final _assetsAudioPlayer = AssetsAudioPlayer()
-      ..open(Audio.liveStream('http://85.214.231.253:8080/stream.mp3'));
-
-    return BlocBuilder<NowPlayingBloc, NowPlayingState>(
-      bloc: context.read(),
+    return BlocBuilder<PlayerBloc, PlayerState>(
       builder: (context, state) {
-        final nowPlaying = state.nowPlaying;
-
         return Scaffold(
           appBar: AppBar(
             title: Text(nowPlaying.radioName),
@@ -75,7 +74,7 @@ class NowPlayingView extends StatelessWidget {
             child: Column(
               children: [
                 RadioStationLogo(
-                  id: state.nowPlayingIndex,
+                  id: nowPlayingIndex,
                   logo: RadioService.getLogoURL(
                     nowPlaying.radioLogo,
                   ),
