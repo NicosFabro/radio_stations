@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:radio/now_playing/bloc/now_playing_bloc.dart';
 import 'package:radio/player/player.dart';
 import 'package:radio/radio/radio.dart';
 import 'package:radio/radio_ui/radio_ui.dart';
