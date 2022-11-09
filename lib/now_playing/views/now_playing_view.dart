@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:radio/now_playing/bloc/now_playing_bloc.dart';
@@ -35,6 +36,9 @@ class NowPlayingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+
+    final _assetsAudioPlayer = AssetsAudioPlayer()
+      ..open(Audio.liveStream('http://85.214.231.253:8080/stream.mp3'));
 
     return BlocBuilder<NowPlayingBloc, NowPlayingState>(
       bloc: context.read(),
