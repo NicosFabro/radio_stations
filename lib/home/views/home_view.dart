@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:radio/home/bloc/home_bloc.dart';
 import 'package:radio/home/views/widgets/radio_station_card.dart';
+import 'package:radio/player/player.dart';
 import 'package:radio/radio/radio.dart';
 
 class HomePage extends StatelessWidget {
@@ -27,6 +28,8 @@ class HomeView extends StatelessWidget {
     final scrollController = ScrollController();
 
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: const PlayerFAB(),
       body: SafeArea(
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {

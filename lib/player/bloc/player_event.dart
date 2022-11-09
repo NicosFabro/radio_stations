@@ -8,7 +8,11 @@ abstract class PlayerEvent extends Equatable {
 }
 
 class StreamRadioStationRequested extends PlayerEvent {
-  const StreamRadioStationRequested({required this.streamURL});
+  const StreamRadioStationRequested({required this.nowPlaying});
 
-  final String streamURL;
+  final NowPlaying nowPlaying;
+}
+
+class TogglePlayerRequested extends PlayerEvent {
+  const TogglePlayerRequested();
 }

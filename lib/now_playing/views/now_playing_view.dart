@@ -19,7 +19,7 @@ class NowPlayingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     context
         .read<PlayerBloc>()
-        .add(StreamRadioStationRequested(streamURL: nowPlaying.radioStream));
+        .add(StreamRadioStationRequested(nowPlaying: nowPlaying));
     return NowPlayingView(
       nowPlaying: nowPlaying,
       nowPlayingIndex: index,
@@ -40,35 +40,17 @@ class NowPlayingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final animationSize = screenWidth * 0.7;
 
     return BlocBuilder<PlayerBloc, PlayerState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(nowPlaying.radioName),
+            title: Text(state.nowPlaying.radioName),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {},
-            icon: const Icon(Icons.play_arrow),
-            label: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  nowPlaying.titleSong,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  nowPlaying.artistSong,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: RadioTextStyles.button.copyWith(fontSize: 14),
-                ),
-              ],
-            ),
-          ),
+          floatingActionButton: const PlayerFAB(),
           body: Center(
             child: Column(
               children: [
@@ -82,12 +64,23 @@ class NowPlayingView extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 SizedBox(
-                  width: screenWidth,
-                  height: screenWidth,
-                  child: RiveAnimation.asset(
+                  width: animationSize,
+                  height: animationSize,
+                  child: const RiveAnimation.asset(
                     'assets/animations/audio-visualizer.riv',
-                    fit: BoxFit.fitWidth,
+                    fit: BoxFit.contain,
                   ),
+                ),
+                Text(
+                  'Now playing:',
+                  style: RadioTextStyles.headline5,
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  '${nowPlaying.titleSong} - ${nowPlaying.artistSong}',
+                  maxLines: 2,
+                  style: RadioTextStyles.headline6,
+                  textAlign: TextAlign.center,
                 ),
               ],
             ),
